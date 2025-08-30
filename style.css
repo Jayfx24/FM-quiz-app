@@ -1,0 +1,62 @@
+:root {
+    /* base */
+    --white: hsl(0, 100%, 100%);
+    --black: hsl(0, 0%, 0%);
+
+    /*  */
+    --grey-50: hsl(220, 38%, 97%);
+    --grey-500: hsl(219, 13%, 100%);
+
+    /* blue */
+
+    --blue-850: hsl(215, 27%, 32%);
+    --blue-950: hsl(214, 24%, 23%);
+    --blue-900: hsl(216, 25%, 25%);
+    
+    --blue-50: hsl(225, 100%, 96%);
+    --blue-100: hsl(220, 50%, 95%);
+    --blue-300: hsl(216, 47%, 78%);
+    --blue-500: hsl(223, 100%, 59%);
+
+    --green-100: hsl(151, 88%, 94%);
+    --green-500: hsl(151, 68%, 52%);
+
+    --purple-100: hsl(278, 100%, 95%);
+    --purple-600: hsl(277, 91%, 56%);
+
+    --orange-50: hsl(27, 100%, 96%);
+    --orange-400: hsl(22, 100%, 60%);
+
+    --red-500: hsl(0, 82%, 63%);
+
+    --ff: 'Rubik', sans-serif;
+
+    /* Font Weights */
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-bold: 700;
+
+    --font-144: var(--fw-medium) 9rem/1em var(--ff);
+    --font-64: var(--fw-medium) 4rem/1em var(--ff);
+    --font-64-light: var(--fw-light) 4rem/1em var(--ff);
+    --font-36: var(--fw-medium) 2.25rem/1.2em var(--ff);
+    --font-28: var(--fw-medium) 1.75rem/1em var(--ff);
+    --font-24: var(--fw-medium) 1.5rem/1.5em var(--ff);
+    --font-24-light: var(--fw-regular) 1.5rem/1.5em var(--ff);
+    --font-20: var(--fw-regular) 1.25rem/1.5em var(--ff);
+
+
+    --font-88-md: var(--fw-medium) 5.5rem/1em var(--ff);
+
+    --font-40-l-md: var(--fw-light) 2.5rem/1em var(--ff);
+    --font-40-md: var(--fw-medium) 2.5rem/1em var(--ff);
+    --font-20-md: var(--fw-medium) 1.25rem/1.2em var(--ff);
+    --font-18-md: var(--fw-medium) 2.5rem/1em var(--ff);
+    --font-14-md: var(--fw-medium) 0.875rem/1.6em var(--ff);
+
+
+
+}
+
