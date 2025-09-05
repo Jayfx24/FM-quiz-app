@@ -2,7 +2,7 @@ export const elements = {
   main: document.querySelector("main"),
   hero: document.querySelector(".hero"),
   quiz: document.querySelector(".quiz"),
-  categoryList : document.querySelector(".quiz-categories__list"),
+  categoryList: document.querySelector(".quiz-categories__list"),
 };
 
 export const components = {
@@ -13,7 +13,7 @@ export const components = {
 
 export function renderQuestions(obj) {
   const questions = components.questions;
-  
+
   questions.innerHTML = `
     <div class="questions">
       <div class="questions__texts">
@@ -27,8 +27,6 @@ export function renderQuestions(obj) {
 
     `;
   if (!elements.quiz.contains(questions)) elements.quiz.appendChild(questions);
-
-  
 }
 
 export function renderOptions(arr) {
@@ -39,12 +37,16 @@ export function renderOptions(arr) {
     const btn = document.createElement("button");
     btn.classList.add("option");
     btn.setAttribute("type", "button");
+    btn.dataset.selected = false
     const option = arr[i];
     btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span>`;
     optionsContainer.appendChild(btn);
   }
+  const submitBtn = document.createElement("button");
+  submitBtn.classList.add("submitBtn");
+  submitBtn.textContent = 'Submit'
+  optionsContainer.appendChild(submitBtn);
 
-
-    if (!elements.quiz.contains(optionsContainer)) elements.quiz.appendChild(optionsContainer);
-
+  if (!elements.quiz.contains(optionsContainer))
+    elements.quiz.appendChild(optionsContainer);
 }
