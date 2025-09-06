@@ -3,6 +3,7 @@ export const elements = {
   hero: document.querySelector(".hero"),
   quiz: document.querySelector(".quiz"),
   categoryList: document.querySelector(".quiz-categories__list"),
+  submitBtn : document.querySelector('.submit-btn')
 };
 
 export const components = {
@@ -37,14 +38,14 @@ export function renderOptions(arr) {
     const btn = document.createElement("button");
     btn.classList.add("option");
     btn.setAttribute("type", "button");
-    btn.dataset.selected = false
+    btn.dataset.selected = false;
     const option = arr[i];
-    btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span>`;
+    btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span> <span class ="status"> </span> `;
     optionsContainer.appendChild(btn);
   }
   const submitBtn = document.createElement("button");
-  submitBtn.classList.add("submitBtn");
-  submitBtn.textContent = 'Submit'
+  submitBtn.classList.add("submit-btn");
+  submitBtn.textContent = "Submit";
   optionsContainer.appendChild(submitBtn);
 
   if (!elements.quiz.contains(optionsContainer))
