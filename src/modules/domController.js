@@ -3,7 +3,11 @@ export const elements = {
   hero: document.querySelector(".hero"),
   quiz: document.querySelector(".quiz"),
   categoryList: document.querySelector(".quiz-categories__list"),
-  submitBtn : document.querySelector('.submit-btn')
+  submitBtn: document.querySelector(".submit-btn"),
+  title: {
+    text: document.querySelector(".title__type"),
+    icon: document.querySelector(".title__icon"),
+  },
 };
 
 export const components = {
@@ -14,9 +18,10 @@ export const components = {
 
 export function renderQuestions(obj) {
   const questions = components.questions;
+  questions.classList.add("questions");
+  questions.innerHTML = "";
 
   questions.innerHTML = `
-    <div class="questions">
       <div class="questions__texts">
         <p class="question__count">Question ${obj.currentCount} of ${obj.allCount}</p>
         <h1 class="question__body">${obj.question}</h1>
@@ -24,7 +29,7 @@ export function renderQuestions(obj) {
       <div class="questions__indicator">
         <progress id="indicator" max="100" value="${obj.percent}">${obj.percent}</progress>
       </div>
-    </div>
+    
 
     `;
   if (!elements.quiz.contains(questions)) elements.quiz.appendChild(questions);
@@ -34,6 +39,9 @@ export function renderOptions(arr) {
   if (arr.length <= 0 || arr.length > 4) return;
   const choice = ["A", "B", "C", "D"];
   const optionsContainer = components.options;
+  optionsContainer.classList.add('"options');
+  optionsContainer.innerHTML = "";
+
   for (let i = 0; i < arr.length; i++) {
     const btn = document.createElement("button");
     btn.classList.add("option");
@@ -46,7 +54,12 @@ export function renderOptions(arr) {
   const submitBtn = document.createElement("button");
   submitBtn.classList.add("submit-btn");
   submitBtn.textContent = "Submit";
+  submitBtn.dataset.next = false;
+
+  const errSpan = document.createElement("span")
+  errSpan.classList.add('error')
   optionsContainer.appendChild(submitBtn);
+  optionsContainer.appendChild(errSpan);
 
   if (!elements.quiz.contains(optionsContainer))
     elements.quiz.appendChild(optionsContainer);
