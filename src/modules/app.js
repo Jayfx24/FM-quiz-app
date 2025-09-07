@@ -20,27 +20,34 @@ export class QuizApp {
   #categoryIconInfo = null;
 
   constructor() {
-    this.data = this.questions = null;
+    this.isGameOn = this.data = this.questions = null;
     this.shownQuestions = new Set();
   }
 
   initialize() {
-    const icons = {
-      HTML: htmlIcon,
-      CSS: cssIcon,
-      JavaScript: jsIcon,
-      Accessibility: accessibilityIcon,
-    };
-
-    const userChoice = (e) => {
+    
+    // const userChoiceEvent = (e) => {
+      // };
+      this._bindEvent();
+    }
+    
+    _userChoiceEvent(){
+      elements.hero.addEventListener("click", (e)=>{
+      const icons = {
+        HTML: htmlIcon,
+        CSS: cssIcon,
+        JavaScript: jsIcon,
+        Accessibility: accessibilityIcon,
+      };
+      
       const target = e.target.closest(".quiz-categories__button");
       if (!target) return;
-
+    
       const value = target.value;
       this.data = quizData(data, value);
-
+    
       this.questions = this.data.questions;
-
+    
       const title = this.data.title;
       this.#categoryIconInfo = {
         html: `<img src="${icons[title]}" alt="${title}">`,
@@ -49,11 +56,11 @@ export class QuizApp {
       elements.title.text.textContent = title;
       elements.title.icon.innerHTML = this.#categoryIconInfo.html;
       elements.hero.style.display = "none";
-
+    
       this._renderDisplay();
-    };
-    elements.hero.addEventListener("click", userChoice);
-    this._bindEvent();
+      console.log('err here')
+    });
+
   }
 
   _restartGameEvent() {
@@ -67,7 +74,7 @@ export class QuizApp {
       this.shownQuestions.clear();
       this.#playerSCore = 0;
 
-      this.initialize();
+      
     });
   }
   _optionsEvent() {
@@ -89,24 +96,25 @@ export class QuizApp {
       const target = e.target.closest(".submit-btn");
       if (!target) return;
 
-      if (target.dataset.next !== "true") {
-        const optionSelected = [...document.querySelectorAll(".option")].find(
-          (el) => el.dataset.selected === "true"
-        );
-
-        if (!optionSelected) {
-          document.querySelector(".error").textContent =
-            "Please select an answer";
-          return;
-        }
-
-        if (this._validateAnswer(optionSelected)) {
-         
-          target.textContent = "Next Question";
-          target.dataset.next = true;
-        }
-      } else {
+      if (target.dataset.next === "true") {
         this._renderDisplay();
+        return;
+      }
+      const optionSelected = [...document.querySelectorAll(".option")].find(
+        (el) => el.dataset.selected === "true"
+      );
+
+      if (!optionSelected) {
+        document.querySelector(".error").textContent =
+          "Please select an answer";
+        return;
+      }
+
+      const canContinue = this._validateAnswer(optionSelected);
+      if (canContinue) {
+        console.log(target);
+        target.textContent = "Next Question";
+        target.dataset.next = true;
       }
     });
   }
@@ -145,7 +153,10 @@ export class QuizApp {
   }
 
   _renderDisplay() {
-    if (this.questions.length === this.shownQuestions.size) {
+    if (
+      this.questions.length > 0 &&
+      this.questions.length === this.shownQuestions.size
+    ) {
       // gameOver logic left and displaying final score
       console.log("here");
       const gameData = {
@@ -163,6 +174,10 @@ export class QuizApp {
     const questions = this.questions.filter(
       (q) => !this.shownQuestions.has(q.question)
     );
+    console.log(questions);
+    console.log(this.questions);
+    console.log(this.shownQuestions);
+
 
     const newQ = questions.pop();
     this.shownQuestions.add(newQ.question);
@@ -180,6 +195,7 @@ export class QuizApp {
   }
 
   _bindEvent() {
+      this._userChoiceEvent()
     this._optionsEvent();
     this._submitEvent();
     this._restartGameEvent();

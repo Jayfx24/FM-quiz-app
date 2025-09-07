@@ -49,7 +49,22 @@ export function renderOptions(arr) {
     btn.setAttribute("type", "button");
     btn.dataset.selected = false;
     const option = arr[i];
-    btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span> <span class ="status"> </span> `;
+    // btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span> <span class ="status"> </span> `;
+    const optionLetter = document.createElement('span')
+    const optionText = document.createElement('span')
+    const status = document.createElement('span')
+    
+
+    optionLetter.classList.add('option__letter')
+    optionText.classList.add('option__text')
+    status.classList.add('status')
+
+    optionLetter.textContent = choice[i];
+    optionText.textContent = option
+
+    btn.appendChild(optionLetter)
+    btn.appendChild(optionText)
+    btn.appendChild(status)
     optionsContainer.appendChild(btn);
   }
   const submitBtn = document.createElement("button");
