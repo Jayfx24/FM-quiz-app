@@ -3,6 +3,7 @@ import {
   elements,
   renderOptions,
   renderQuestions,
+  renderGameOver,
 } from "./domController";
 import { quizData } from "./processData";
 import data from "../data.json";
@@ -15,6 +16,8 @@ import jsIcon from "../assets/images/icon-js.svg";
 
 export class QuizApp {
   #currentAnswer = null;
+  #playerSCore = 0;
+  #categoryIconInfo = null;
 
   constructor() {
     this.data = this.questions = null;
@@ -22,7 +25,6 @@ export class QuizApp {
   }
 
   initialize() {
-    // will hide when  category ha been picked
     const icons = {
       HTML: htmlIcon,
       CSS: cssIcon,
@@ -30,7 +32,7 @@ export class QuizApp {
       Accessibility: accessibilityIcon,
     };
 
-    elements.categoryList.addEventListener("click", (e) => {
+    const userChoice = (e) => {
       const target = e.target.closest(".quiz-categories__button");
       if (!target) return;
 
@@ -40,19 +42,33 @@ export class QuizApp {
       this.questions = this.data.questions;
 
       const title = this.data.title;
+      this.#categoryIconInfo = {
+        html: `<img src="${icons[title]}" alt="${title}">`,
+        title: title,
+      };
       elements.title.text.textContent = title;
-      elements.title.icon.innerHTML = `<img src="${icons[title]}" alt="${title}">`;
-      console.log(elements.title.icon);
+      elements.title.icon.innerHTML = this.#categoryIconInfo.html;
       elements.hero.style.display = "none";
-      this._renderDisplay();
-    });
 
+      this._renderDisplay();
+    };
+    elements.hero.addEventListener("click", userChoice);
     this._bindEvent();
   }
 
-  handleSubmission() {
-    // get user submission and check if correct and wrong
-    //
+  _restartGameEvent() {
+    elements.quiz.addEventListener("click", (e) => {
+      const target = e.target.closest(".restart-game");
+      if (!target) return;
+
+      elements.quiz.innerHTML = "";
+      elements.hero.style.display = "";
+      this.#categoryIconInfo = this.questions = null;
+      this.shownQuestions.clear();
+      this.#playerSCore = 0;
+
+      this.initialize();
+    });
   }
   _optionsEvent() {
     elements.quiz.addEventListener("click", (e) => {
@@ -85,17 +101,13 @@ export class QuizApp {
         }
 
         if (this._validateAnswer(optionSelected)) {
-          // const submitBtn = document.querySelector(".submit-btn");
+         
           target.textContent = "Next Question";
           target.dataset.next = true;
         }
       } else {
-        console.log("working");
-
         this._renderDisplay();
       }
-
-     
     });
   }
 
@@ -111,6 +123,7 @@ export class QuizApp {
 
     if (rightAnswer) {
       userOptionStatus.innerHTML = rightIcon;
+      this.#playerSCore++;
       return true;
     }
 
@@ -134,6 +147,15 @@ export class QuizApp {
   _renderDisplay() {
     if (this.questions.length === this.shownQuestions.size) {
       // gameOver logic left and displaying final score
+      console.log("here");
+      const gameData = {
+        icon: this.#categoryIconInfo.html,
+        type: this.#categoryIconInfo.title,
+        finalScore: this.#playerSCore,
+        count: this.questions.length,
+      };
+
+      renderGameOver(gameData);
 
       return;
     }
@@ -142,11 +164,9 @@ export class QuizApp {
       (q) => !this.shownQuestions.has(q.question)
     );
 
-    console.log(questions);
     const newQ = questions.pop();
     this.shownQuestions.add(newQ.question);
     this.#currentAnswer = newQ.answer;
-    console.log(this.shownQuestions);
 
     const questionsInfo = {
       question: newQ.question,
@@ -162,5 +182,6 @@ export class QuizApp {
   _bindEvent() {
     this._optionsEvent();
     this._submitEvent();
+    this._restartGameEvent();
   }
 }

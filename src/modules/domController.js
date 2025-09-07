@@ -14,6 +14,7 @@ export const components = {
   container: document.createElement("section"),
   questions: document.createElement("div"),
   options: document.createElement("div"),
+  gameOver: document.createElement("div"),
 };
 
 export function renderQuestions(obj) {
@@ -56,11 +57,36 @@ export function renderOptions(arr) {
   submitBtn.textContent = "Submit";
   submitBtn.dataset.next = false;
 
-  const errSpan = document.createElement("span")
-  errSpan.classList.add('error')
+  const errSpan = document.createElement("span");
+  errSpan.classList.add("error");
   optionsContainer.appendChild(submitBtn);
   optionsContainer.appendChild(errSpan);
 
   if (!elements.quiz.contains(optionsContainer))
     elements.quiz.appendChild(optionsContainer);
+}
+
+export function renderGameOver(data) {
+  const gameOver = components.gameOver;
+  components.questions.innerHTML = "";
+  components.options.innerHTML = "";
+
+  gameOver.innerHTML = `
+    <h1 class="gameOver">Quiz Completed <span>You Scored...</span></h1>
+      <div class="scoreboard">
+        <div class="category__info">
+          <div class="category__icon">${data.icon}</div>
+          <div class="category__type">${data.type}</div>
+        </div>
+        <div class="score">
+          <h2 class="final-score">
+              ${data.finalScore}
+          </h2>
+          <p class="total">Out of <span class="score__count">${data.count}</span></p>
+        </div>
+
+        <button class="restart-game"> Play again </button>
+      </div>
+  `;
+  if (!elements.quiz.contains(gameOver)) elements.quiz.appendChild(gameOver);
 }
