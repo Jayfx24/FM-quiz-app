@@ -14,16 +14,41 @@
     <title>Frontend Mentor | Frontend quiz app</title>
   </head>
   <body>
-    <header>
+    <header class="container">
       <!-- toggle mode switch -->
       <div class="title-container">
         <div class="title__icon"></div>
         <div class="title__type"></div>
       </div>
 
-      <div class="toggle-mode"></div>
+      <div class="toggle-mode">
+        <div class="sun">
+          <img
+            src="./assets/images/icon-sun-dark.svg"
+            alt="light mode (dark)"
+          />
+          <img
+            src="./assets/images/icon-sun-light.svg"
+            alt="light mode (light)"
+          />
+        </div>
+        <div class="toggle-slide" >
+          <input type="checkbox" id="mode-toggle" />
+          <label for="mode-toggle" class="toggle"></label>
+        </div>
+        <div class="moon">
+          <img
+            src="./assets/images/icon-moon-dark.svg"
+            alt="dark mode (dark)"
+          />
+          <img
+            src="./assets/images/icon-moon-light.svg"
+            alt="dark mode (light)"
+          />
+        </div>
+      </div>
     </header>
-   
+
     <main>
       <section class="hero">
         <div class="hero__texts">
@@ -65,7 +90,7 @@
                   src="assets/images/icon-js.svg"
                   alt="JavaScript"
                 />
-                <span class="quiz-categories__label" >JavaScript</span>
+                <span class="quiz-categories__label">JavaScript</span>
               </button>
             </li>
             <li class="quiz-categories__item">
@@ -85,10 +110,5 @@
       <section class="quiz"></section>
     </main>
     <footer></footer>
-
-    
-   
-
-    
   </body>
 </html>
