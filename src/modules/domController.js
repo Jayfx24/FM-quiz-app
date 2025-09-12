@@ -8,6 +8,9 @@ export const elements = {
     text: document.querySelector(".title__type"),
     icon: document.querySelector(".title__icon"),
   },
+  header: document.querySelector("header"),
+  toggleSwitch: document.querySelector(".toggle-mode"),
+  modeToggle: document.getElementById("mode-toggle"),
 };
 
 export const components = {
@@ -50,21 +53,20 @@ export function renderOptions(arr) {
     btn.dataset.selected = false;
     const option = arr[i];
     // btn.innerHTML = `<span class="option__letter">${choice[i]}</span> <span class="option__text">${option}</span> <span class ="status"> </span> `;
-    const optionLetter = document.createElement('span')
-    const optionText = document.createElement('span')
-    const status = document.createElement('span')
-    
+    const optionLetter = document.createElement("span");
+    const optionText = document.createElement("span");
+    const status = document.createElement("span");
 
-    optionLetter.classList.add('option__letter')
-    optionText.classList.add('option__text')
-    status.classList.add('status')
+    optionLetter.classList.add("option__letter");
+    optionText.classList.add("option__text");
+    status.classList.add("status");
 
     optionLetter.textContent = choice[i];
-    optionText.textContent = option
+    optionText.textContent = option;
 
-    btn.appendChild(optionLetter)
-    btn.appendChild(optionText)
-    btn.appendChild(status)
+    btn.appendChild(optionLetter);
+    btn.appendChild(optionText);
+    btn.appendChild(status);
     optionsContainer.appendChild(btn);
   }
   const submitBtn = document.createElement("button");

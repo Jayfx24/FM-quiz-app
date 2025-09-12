@@ -199,5 +199,15 @@ export class QuizApp {
     this._optionsEvent();
     this._submitEvent();
     this._restartGameEvent();
+    this._modeListener()
+  }
+
+  _modeListener(){
+    elements.header.addEventListener('click',(e)=>{
+      const target = e.target.closest("#mode-toggle");
+
+      if (!target) return
+      document.body.classList.toggle('dark')
+    })
   }
 }
