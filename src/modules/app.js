@@ -58,6 +58,7 @@ export class QuizApp {
       elements.hero.style.display = "none";
     
       this._renderDisplay();
+      elements.quiz.classList.toggle('hide')
       console.log('err here')
     });
 
@@ -72,6 +73,8 @@ export class QuizApp {
       elements.hero.style.display = "";
       this.#categoryIconInfo = this.questions = null;
       this.shownQuestions.clear();
+      elements.quiz.classList.toggle('hide')
+
       this.#playerSCore = 0;
 
       

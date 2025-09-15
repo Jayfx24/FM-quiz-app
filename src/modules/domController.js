@@ -43,7 +43,7 @@ export function renderOptions(arr) {
   if (arr.length <= 0 || arr.length > 4) return;
   const choice = ["A", "B", "C", "D"];
   const optionsContainer = components.options;
-  optionsContainer.classList.add('"options');
+  optionsContainer.classList.add('options');
   optionsContainer.innerHTML = "";
 
   for (let i = 0; i < arr.length; i++) {

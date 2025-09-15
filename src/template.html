@@ -33,7 +33,7 @@
           />
         </div> -->
         <div class="toggle-icon toggle-icon--left"></div>
-        <div class="toggle-slide" >
+        <div class="toggle-slide">
           <input type="checkbox" id="mode-toggle" />
           <label for="mode-toggle" class="toggle"></label>
         </div>
@@ -52,14 +52,14 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero container">
         <div class="hero__texts">
           <h1 class="hero__title">
             Welcome to the <span>Frontend Quiz!</span>
           </h1>
 
           <p class="hero__subtitle">
-            Pick a subject to get started. HTML CSS JavaScript Accessibility
+            Pick a subject to get started.
           </p>
         </div>
 
@@ -67,41 +67,49 @@
           <ul class="quiz-categories__list">
             <li class="quiz-categories__item">
               <button class="quiz-categories__button" value="HTML">
-                <img
-                  class="quiz-categories__icon"
-                  src="assets/images/icon-html.svg"
-                  alt="html"
-                />
+                <span class="quiz-categories__icon-wrapper quiz-categories__icon-wrapper--html">
+                  <img
+                    class="quiz-categories__icon"
+                    src="assets/images/icon-html.svg"
+                    alt="html"
+                  />
+                </span>
                 <span class="quiz-categories__label">HTML</span>
               </button>
             </li>
             <li class="quiz-categories__item">
               <button class="quiz-categories__button" value="CSS">
-                <img
-                  class="quiz-categories__icon"
-                  src="assets/images/icon-css.svg"
-                  alt="css"
-                />
+                <span class="quiz-categories__icon-wrapper quiz-categories__icon-wrapper--css">
+                  <img
+                    class="quiz-categories__icon"
+                    src="assets/images/icon-css.svg"
+                    alt="css"
+                  />
+                </span>
                 <span class="quiz-categories__label">CSS</span>
               </button>
             </li>
             <li class="quiz-categories__item">
               <button class="quiz-categories__button" value="JavaScript">
-                <img
-                  class="quiz-categories__icon"
-                  src="assets/images/icon-js.svg"
-                  alt="JavaScript"
-                />
+                <span class="quiz-categories__icon-wrapper quiz-categories__icon-wrapper--js">
+                  <img
+                    class="quiz-categories__icon"
+                    src="assets/images/icon-js.svg"
+                    alt="JavaScript"
+                  />
+                </span>
                 <span class="quiz-categories__label">JavaScript</span>
               </button>
             </li>
             <li class="quiz-categories__item">
               <button class="quiz-categories__button" value="Accessibility">
-                <img
-                  class="quiz-categories__icon"
-                  src="assets/images/icon-accessibility.svg"
-                  alt="Accessibility"
-                />
+                <span class="quiz-categories__icon-wrapper quiz-categories__icon-wrapper--a11y">
+                  <img
+                    class="quiz-categories__icon"
+                    src="assets/images/icon-accessibility.svg"
+                    alt="Accessibility"
+                  />
+                </span>
                 <span class="quiz-categories__label">Accessibility</span>
               </button>
             </li>
@@ -109,7 +117,7 @@
         </div>
       </section>
 
-      <section class="quiz"></section>
+      <section class="quiz container hide"></section>
     </main>
     <footer></footer>
   </body>
