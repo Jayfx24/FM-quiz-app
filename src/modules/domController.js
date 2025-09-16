@@ -22,13 +22,13 @@ export const components = {
 
 export function renderQuestions(obj) {
   const questions = components.questions;
-  questions.classList.add("questions");
+  questions.classList.add("question-wrapper");
   questions.innerHTML = "";
 
   questions.innerHTML = `
       <div class="questions__texts">
         <p class="question__count">Question ${obj.currentCount} of ${obj.allCount}</p>
-        <h1 class="question__body">${obj.question}</h1>
+        <h1 class="question__body"></h1>
       </div>
       <div class="questions__indicator">
         <progress id="indicator" max="100" value="${obj.percent}">${obj.percent}</progress>
@@ -36,6 +36,8 @@ export function renderQuestions(obj) {
     
 
     `;
+
+  questions.querySelector('.question__body').textContent = obj.question
   if (!elements.quiz.contains(questions)) elements.quiz.appendChild(questions);
 }
 

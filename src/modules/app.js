@@ -25,43 +25,45 @@ export class QuizApp {
   }
 
   initialize() {
-    
     // const userChoiceEvent = (e) => {
-      // };
-      this._bindEvent();
-    }
-    
-    _userChoiceEvent(){
-      elements.hero.addEventListener("click", (e)=>{
+    // };
+    this._bindEvent();
+  }
+
+  _userChoiceEvent() {
+    elements.hero.addEventListener("click", (e) => {
       const icons = {
-        HTML: htmlIcon,
-        CSS: cssIcon,
-        JavaScript: jsIcon,
-        Accessibility: accessibilityIcon,
+        HTML: { icon: htmlIcon, class: "icon-wrapper--html" },
+        CSS: { icon: cssIcon, class: "icon-wrapper--css" },
+        JavaScript: { icon: jsIcon, class: "icon-wrapper--js" },
+        Accessibility: { icon: accessibilityIcon, class: "icon-wrapper--a11y" },
       };
-      
+
       const target = e.target.closest(".quiz-categories__button");
       if (!target) return;
-    
+
       const value = target.value;
       this.data = quizData(data, value);
-    
+
       this.questions = this.data.questions;
-    
+
       const title = this.data.title;
+      const selectedCategory = icons[title]
       this.#categoryIconInfo = {
-        html: `<img src="${icons[title]}" alt="${title}">`,
+        html: `<img src="${selectedCategory.icon}" alt="${title}">`,
         title: title,
+
       };
+
       elements.title.text.textContent = title;
       elements.title.icon.innerHTML = this.#categoryIconInfo.html;
+      elements.title.icon.classList.add(selectedCategory.class)
       elements.hero.style.display = "none";
-    
-      this._renderDisplay();
-      elements.quiz.classList.toggle('hide')
-      console.log('err here')
-    });
 
+      this._renderDisplay();
+      elements.quiz.classList.toggle("hide");
+      console.log("err here");
+    });
   }
 
   _restartGameEvent() {
@@ -73,11 +75,9 @@ export class QuizApp {
       elements.hero.style.display = "";
       this.#categoryIconInfo = this.questions = null;
       this.shownQuestions.clear();
-      elements.quiz.classList.toggle('hide')
+      elements.quiz.classList.toggle("hide");
 
       this.#playerSCore = 0;
-
-      
     });
   }
   _optionsEvent() {
@@ -181,7 +181,6 @@ export class QuizApp {
     console.log(this.questions);
     console.log(this.shownQuestions);
 
-
     const newQ = questions.pop();
     this.shownQuestions.add(newQ.question);
     this.#currentAnswer = newQ.answer;
@@ -198,19 +197,19 @@ export class QuizApp {
   }
 
   _bindEvent() {
-      this._userChoiceEvent()
+    this._userChoiceEvent();
     this._optionsEvent();
     this._submitEvent();
     this._restartGameEvent();
-    this._modeListener()
+    this._modeListener();
   }
 
-  _modeListener(){
-    elements.header.addEventListener('click',(e)=>{
+  _modeListener() {
+    elements.header.addEventListener("click", (e) => {
       const target = e.target.closest("#mode-toggle");
 
-      if (!target) return
-      document.body.classList.toggle('dark')
-    })
+      if (!target) return;
+      document.body.classList.toggle("dark");
+    });
   }
 }
