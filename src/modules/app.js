@@ -48,21 +48,20 @@ export class QuizApp {
       this.questions = this.data.questions;
 
       const title = this.data.title;
-      const selectedCategory = icons[title]
+      const selectedCategory = icons[title];
       this.#categoryIconInfo = {
         html: `<img src="${selectedCategory.icon}" alt="${title}">`,
         title: title,
-
       };
 
       elements.title.text.textContent = title;
       elements.title.icon.innerHTML = this.#categoryIconInfo.html;
-      elements.title.icon.classList.add(selectedCategory.class)
+      elements.title.icon.classList.add(selectedCategory.class);
       elements.hero.style.display = "none";
 
       this._renderDisplay();
       elements.quiz.classList.toggle("hide");
-      console.log("err here");
+     
     });
   }
 
@@ -108,14 +107,14 @@ export class QuizApp {
       );
 
       if (!optionSelected) {
-        document.querySelector(".error").textContent =
-          "Please select an answer";
+        document.querySelector(".error").innerHTML =
+          `<span class="icon-wrapper"><img src= "${incorrectIcon}" alt="error icon"></span><p>Please select an answer</p>`;
         return;
       }
 
       const canContinue = this._validateAnswer(optionSelected);
       if (canContinue) {
-        console.log(target);
+       
         target.textContent = "Next Question";
         target.dataset.next = true;
       }
@@ -131,23 +130,30 @@ export class QuizApp {
     const rightIcon = `<img src="${correctIcon}" alt="correct answer" class="status-icon">`;
     const wrongIcon = `<img src="${incorrectIcon}"  alt="wrong answer" class="status-icon"">`;
     const userOptionStatus = el.querySelector(".status");
+    const getAllOptions = document.querySelectorAll(".option");
 
+    [...getAllOptions].forEach((element) => {
+      console.log(element)
+      if (element.dataset.selected !== "true") {
+        element.disabled = true;
+      }
+    });
     if (rightAnswer) {
       userOptionStatus.innerHTML = rightIcon;
       this.#playerSCore++;
+      el.classList.add("correct");
       return true;
     }
-
-    const getCorrectBtn = [...document.querySelectorAll(".option")].find(
-      (el) => {
-        return (
-          el.querySelector(".option__text").textContent === this.#currentAnswer
-        );
-      }
-    );
-
+    const getCorrectBtn = [...getAllOptions].find((el) => {
+      return (
+        el.querySelector(".option__text").textContent === this.#currentAnswer
+      );
+    });
+   
     getCorrectBtn.querySelector(".status").innerHTML = rightIcon;
     userOptionStatus.innerHTML = wrongIcon;
+    el.classList.add("incorrect");
+
     return true;
   }
   _selectedOption(e) {
@@ -161,7 +167,7 @@ export class QuizApp {
       this.questions.length === this.shownQuestions.size
     ) {
       // gameOver logic left and displaying final score
-      console.log("here");
+     
       const gameData = {
         icon: this.#categoryIconInfo.html,
         type: this.#categoryIconInfo.title,
@@ -177,9 +183,7 @@ export class QuizApp {
     const questions = this.questions.filter(
       (q) => !this.shownQuestions.has(q.question)
     );
-    console.log(questions);
-    console.log(this.questions);
-    console.log(this.shownQuestions);
+
 
     const newQ = questions.pop();
     this.shownQuestions.add(newQ.question);
