@@ -28,6 +28,16 @@ export class QuizApp {
     // const userChoiceEvent = (e) => {
     // };
     this._bindEvent();
+    // elements.hero.classList.add('hide')
+    // elements.quiz.classList.remove('hide')
+    //  const gameData = {
+    //     icon:  `<img src="${jsIcon}" alt="title" class="icon">`,
+    //     type: 'javaScript',
+    //     finalScore: 9,
+    //     count: 10,
+    //   };
+
+    //   renderGameOver(gameData);
   }
 
   _userChoiceEvent() {
@@ -50,7 +60,7 @@ export class QuizApp {
       const title = this.data.title;
       const selectedCategory = icons[title];
       this.#categoryIconInfo = {
-        html: `<img src="${selectedCategory.icon}" alt="${title}">`,
+        html: `<img src="${selectedCategory.icon}" alt="${title}" class="icon">`,
         title: title,
       };
 

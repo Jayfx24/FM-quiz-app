@@ -37,7 +37,7 @@ export function renderQuestions(obj) {
 
     `;
 
-  questions.querySelector('.question__body').textContent = obj.question
+  questions.querySelector(".question__body").textContent = obj.question;
   if (!elements.quiz.contains(questions)) elements.quiz.appendChild(questions);
 }
 
@@ -45,7 +45,7 @@ export function renderOptions(arr) {
   if (arr.length <= 0 || arr.length > 4) return;
   const choice = ["A", "B", "C", "D"];
   const optionsContainer = components.options;
-  optionsContainer.classList.add('options');
+  optionsContainer.classList.add("options");
   optionsContainer.innerHTML = "";
 
   for (let i = 0; i < arr.length; i++) {
@@ -72,7 +72,7 @@ export function renderOptions(arr) {
     optionsContainer.appendChild(btn);
   }
   const submitBtn = document.createElement("button");
-  submitBtn.classList.add("submit-btn");
+  submitBtn.classList.add("submit-btn","button--action");
   submitBtn.textContent = "Submit";
   submitBtn.dataset.next = false;
 
@@ -89,13 +89,14 @@ export function renderGameOver(data) {
   const gameOver = components.gameOver;
   components.questions.innerHTML = "";
   components.options.innerHTML = "";
-
-  gameOver.innerHTML = `
-    <h1 class="gameOver">Quiz Completed <span>You Scored...</span></h1>
+  gameOver.classList.add("gameover");
+  elements.quiz.innerHTML = `
+    <h1 class="gameover__title">Quiz Completed <span>You Scored...</span></h1>
+    <div class= "game-details">
       <div class="scoreboard">
         <div class="category__info">
-          <div class="category__icon">${data.icon}</div>
-          <div class="category__type">${data.type}</div>
+          <div class="icon-wrapper icon-wrapper--js category__icon">${data.icon}</div>
+          <h2 class="category__type">${data.type}</h2>
         </div>
         <div class="score">
           <h2 class="final-score">
@@ -103,9 +104,9 @@ export function renderGameOver(data) {
           </h2>
           <p class="total">Out of <span class="score__count">${data.count}</span></p>
         </div>
-
-        <button class="restart-game"> Play again </button>
+        </div>
+        <button class="restart-game button--action"> Play again </button>
       </div>
   `;
-  if (!elements.quiz.contains(gameOver)) elements.quiz.appendChild(gameOver);
+  // if (!elements.quiz.contains(gameOver)) elements.quiz.appendChild(gameOver);
 }
