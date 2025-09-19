@@ -483,9 +483,45 @@ button:disabled {
 .category__info {
     display: flex;
     align-items: center;
-     gap: 0.5rem;
+    gap: 0.5rem;
     font: var(--font-36)
 }
+
+/*  */
+.progress-wrapper {
+    background-color: var(--btn-clr);
+    padding: .35rem;
+    border-radius: 999px;
+}
+
+progress {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--btn-clr);
+    height: 1rem;
+    overflow: hidden;
+
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--btn-clr);
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--purple-600);
+    border-radius: 999px;
+}
+
+::-moz-progress-bar {
+    background-color: var(--purple-600);
+    border-radius: 999px;
+
+}
+
+
 
 @media (max-width : 1023px) {
 
@@ -517,11 +553,11 @@ button:disabled {
         --bg-img: url('./assets/images/pattern-background-mobile-dark.svg')
     }
 
-    .scoreboard{
+    .scoreboard {
         padding: 2rem;
     }
 
-    .icon{
+    .icon {
         width: 25px;
         height: 25px;
     }

@@ -30,7 +30,7 @@ export function renderQuestions(obj) {
         <p class="question__count">Question ${obj.currentCount} of ${obj.allCount}</p>
         <h1 class="question__body"></h1>
       </div>
-      <div class="questions__indicator">
+      <div class="progress-wrapper">
         <progress id="indicator" max="100" value="${obj.percent}">${obj.percent}</progress>
       </div>
     
