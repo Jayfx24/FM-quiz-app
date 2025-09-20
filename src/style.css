@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'Rubik';
+    src: url('./assets/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Rubik';
+    src: url('./assets/fonts/Rubik-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     /* base */
     --white: hsl(0, 100%, 100%);
@@ -38,21 +54,13 @@
     --fw-medium: 500;
     --fw-bold: 700;
 
-    --font-144: var(--fw-medium) 9rem/1em var(--ff);
-    --font-64: var(--fw-light) 4rem/1em var(--ff);
-    --font-36: var(--fw-medium) 2.25rem/1.2em var(--ff);
-    --font-28: var(--fw-medium) 1.75rem/1em var(--ff);
-    --font-24: var(--fw-regular) 1.5rem/1.5em var(--ff);
-    --font-20: italic var(--fw-regular) 1.25rem/1.5em var(--ff);
+    --font-xxl: var(--fw-medium) 9rem/1em var(--ff);
+    --font-xl: var(--fw-light) 4rem/1em var(--ff);
+    --font-lg: var(--fw-medium) 2.25rem/1.2em var(--ff);
+    --font-md: var(--fw-medium) 1.75rem/1em var(--ff);
+    --font-sm: var(--fw-regular) 1.5rem/1.5em var(--ff);
+    --font-xs: italic var(--fw-regular) 1.25rem/1.5em var(--ff);
 
-
-    --font-88-md: var(--fw-medium) 5.5rem/1em var(--ff);
-
-    --font-40-l-md: var(--fw-light) 2.5rem/1em var(--ff);
-    --font-40-md: var(--fw-medium) 2.5rem/1em var(--ff);
-    --font-20-md: var(--fw-medium) 1.25rem/1.2em var(--ff);
-    --font-18-md: var(--fw-medium) 2.5rem/1em var(--ff);
-    --font-14-md: var(--fw-medium) 0.875rem/1.6em var(--ff);
 
 
 
@@ -67,7 +75,7 @@
     /*  */
     --padding-inline-body: 5rem;
 
-    --radius-24: 1.5rem
+    --radius-sm: 1.5rem
 }
 
 
@@ -135,9 +143,9 @@ button {
     outline: transparent;
     border: none;
     padding: 1.5rem;
-    font: var(--font-28);
+    font: var(--font-md);
     cursor: pointer;
-    border-radius: var(--radius-24)
+    border-radius: var(--radius-sm)
 }
 
 img {
@@ -231,18 +239,20 @@ input:checked+.toggle::before {
 }
 
 .hero__title {
-    font: var(--font-64);
+    font: var(--font-xl);
     margin-bottom: 3rem;
+    font-weight: 300;
+
 }
 
 .hero__title span {
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-medium);
 }
 
 .hero__subtitle,
 .question__count {
     color: var(--subheading-clr);
-    font: var(--font-20);
+    font: var(--font-xs);
 }
 
 .quiz-categories__button,
@@ -322,7 +332,7 @@ input:checked+.toggle::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    font: var(--font-24);
+    font: var(--font-sm);
     color: var(--err-clr);
     gap: .5em;
 }
@@ -355,7 +365,7 @@ button:is(:hover, :active, :focus-visible):not(:disabled):not(.button--action) {
     outline: 1px solid var(--btn-hover);
 }
 
-.button--action:hover {
+.button--action:is(:hover, :active, :focus-visible) {
     opacity: 0.8;
 }
 
@@ -384,7 +394,7 @@ button:disabled {
 
 .title__type,
 .category__type {
-    font: var(--font-28);
+    font: var(--font-md);
 }
 
 .title-container {
@@ -406,7 +416,7 @@ button:disabled {
 }
 
 .question__body {
-    font: var(--font-36);
+    font: var(--font-lg);
     max-width: 25ch;
 }
 
@@ -448,18 +458,18 @@ button:disabled {
 
 /* Game-over */
 .gameover__title {
-    font: var(--font-64);
+    font: var(--font-xl);
     max-width: 15ch;
 }
 
 .gameover__title span {
-    font-weight: var(--fw-bold);
+    font-weight: var(--fw-medium);
 }
 
 .game-details {
     display: grid;
     gap: 1.5rem;
-    font: var(--font-24);
+    font: var(--font-sm);
 }
 
 .scoreboard {
@@ -468,7 +478,7 @@ button:disabled {
     gap: 2.5rem;
     background-color: var(--btn-clr);
     padding: 3rem;
-    border-radius: var(--radius-24)
+    border-radius: var(--radius-sm)
 }
 
 .score {
@@ -476,7 +486,7 @@ button:disabled {
 }
 
 .final-score {
-    font: var(--font-144);
+    font: var(--font-xxl);
 }
 
 .total {
@@ -487,7 +497,7 @@ button:disabled {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font: var(--font-36)
+    font: var(--font-lg)
 }
 
 /*  */
@@ -540,7 +550,7 @@ progress::-webkit-progress-value {
 
 
     .hero .quiz {
-       
+
         gap: 2.5rem;
     }
 
@@ -548,16 +558,25 @@ progress::-webkit-progress-value {
         height: auto;
     }
 
-    .question__body{
+    .question__body {
         max-width: none;
     }
 }
 
 @media (max-width : 767px) {
 
+    :root {
+        --font-xxl: var(--fw-medium) 5.5rem/1em var(--ff);
+        --font-xl: var(--fw-light) 2.5rem/1em var(--ff);
+        --font-lg: var(--fw-medium) 1.25rem/1.2em var(--ff);
+        --font-md: var(--fw-medium) 1.125rem/1em var(--ff);
+        --font-sm: var(--fw-regular) 0.875rem/1.5em var(--ff);
+    }
+
     body {
         --bg-img: url('./assets/images/pattern-background-mobile-light.svg');
         --padding-inline-body: 1.25rem;
+
     }
 
     body.dark {
@@ -573,6 +592,16 @@ progress::-webkit-progress-value {
         height: 25px;
     }
 
+    button{
+        padding:1rem;
+    }
+    .option__letter{
+            padding: 0.65rem 0.875rem;
+    }
+
+    .scoreboard{
+        gap:1rem;
+    }
 }
 
 

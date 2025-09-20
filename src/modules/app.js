@@ -25,20 +25,8 @@ export class QuizApp {
   }
 
   initialize() {
-    // const userChoiceEvent = (e) => {
-    // };
     this._isDarkMode();
-    this._bindEvent();
-    // elements.hero.classList.add('hide')
-    // elements.quiz.classList.remove('hide')
-    //  const gameData = {
-    //     icon:  `<img src="${jsIcon}" alt="title" class="icon">`,
-    //     type: 'javaScript',
-    //     finalScore: 9,
-    //     count: 10,
-    //   };
-
-    //   renderGameOver(gameData);
+    this._bindEvent(); 
   }
 
   _userChoiceEvent() {
@@ -69,7 +57,7 @@ export class QuizApp {
       elements.title.text.textContent = title;
       elements.title.icon.innerHTML = this.#categoryIconInfo.html;
       elements.title.icon.classList.add(selectedCategory.class);
-      elements.hero.style.display = "none";
+      elements.hero.classList.add('hide');
 
       this._renderDisplay();
       elements.quiz.classList.toggle("hide");
@@ -82,7 +70,8 @@ export class QuizApp {
       if (!target) return;
 
       elements.quiz.innerHTML = "";
-      elements.hero.style.display = "";
+      elements.hero.classList.remove('hide');
+      
       this.#categoryIconInfo = this.questions = null;
       this.shownQuestions.clear();
       elements.quiz.classList.toggle("hide");
@@ -148,7 +137,7 @@ export class QuizApp {
     const getAllOptions = document.querySelectorAll(".option");
 
     [...getAllOptions].forEach((element) => {
-      console.log(element);
+     
       if (element.dataset.selected !== "true") {
         element.disabled = true;
       }
