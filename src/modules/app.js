@@ -27,6 +27,7 @@ export class QuizApp {
   initialize() {
     // const userChoiceEvent = (e) => {
     // };
+    this._isDarkMode();
     this._bindEvent();
     // elements.hero.classList.add('hide')
     // elements.quiz.classList.remove('hide')
@@ -62,6 +63,7 @@ export class QuizApp {
       this.#categoryIconInfo = {
         html: `<img src="${selectedCategory.icon}" alt="${title}" class="icon">`,
         title: title,
+        class: selectedCategory.class,
       };
 
       elements.title.text.textContent = title;
@@ -71,7 +73,6 @@ export class QuizApp {
 
       this._renderDisplay();
       elements.quiz.classList.toggle("hide");
-     
     });
   }
 
@@ -117,16 +118,20 @@ export class QuizApp {
       );
 
       if (!optionSelected) {
-        document.querySelector(".error").innerHTML =
-          `<span class="icon-wrapper"><img src= "${incorrectIcon}" alt="error icon"></span><p>Please select an answer</p>`;
+        document.querySelector(
+          ".error"
+        ).innerHTML = `<span class="icon-wrapper"><img src= "${incorrectIcon}" alt="error icon"></span><p>Please select an answer</p>`;
         return;
       }
 
       const canContinue = this._validateAnswer(optionSelected);
       if (canContinue) {
-       
-        target.textContent = "Next Question";
         target.dataset.next = true;
+        if (this.questions.length === this.shownQuestions.size) {
+          target.textContent = "Finish Quiz";
+        } else {
+          target.textContent = "Next Question";
+        }
       }
     });
   }
@@ -143,7 +148,7 @@ export class QuizApp {
     const getAllOptions = document.querySelectorAll(".option");
 
     [...getAllOptions].forEach((element) => {
-      console.log(element)
+      console.log(element);
       if (element.dataset.selected !== "true") {
         element.disabled = true;
       }
@@ -159,7 +164,7 @@ export class QuizApp {
         el.querySelector(".option__text").textContent === this.#currentAnswer
       );
     });
-   
+
     getCorrectBtn.querySelector(".status").innerHTML = rightIcon;
     userOptionStatus.innerHTML = wrongIcon;
     el.classList.add("incorrect");
@@ -177,10 +182,11 @@ export class QuizApp {
       this.questions.length === this.shownQuestions.size
     ) {
       // gameOver logic left and displaying final score
-     
+
       const gameData = {
         icon: this.#categoryIconInfo.html,
         type: this.#categoryIconInfo.title,
+        class: this.#categoryIconInfo.class,
         finalScore: this.#playerSCore,
         count: this.questions.length,
       };
@@ -193,7 +199,6 @@ export class QuizApp {
     const questions = this.questions.filter(
       (q) => !this.shownQuestions.has(q.question)
     );
-
 
     const newQ = questions.pop();
     this.shownQuestions.add(newQ.question);
@@ -225,5 +230,18 @@ export class QuizApp {
       if (!target) return;
       document.body.classList.toggle("dark");
     });
+  }
+
+  _isDarkMode() {
+    if (window.matchMedia) {
+      const isDark = window.matchMedia("prefers-color-scheme: dark");
+
+      if (isDark) {
+        document.body.classList.add("dark");
+        elements.modeToggle.checked = true;
+      } else {
+        document.body.classList.remove("dark");
+      }
+    }
   }
 }

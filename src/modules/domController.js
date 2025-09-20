@@ -95,7 +95,7 @@ export function renderGameOver(data) {
     <div class= "game-details">
       <div class="scoreboard">
         <div class="category__info">
-          <div class="icon-wrapper icon-wrapper--js category__icon">${data.icon}</div>
+          <div class="icon-wrapper ${data.class} category__icon">${data.icon}</div>
           <h2 class="category__type">${data.type}</h2>
         </div>
         <div class="score">
