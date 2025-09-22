@@ -201,7 +201,7 @@ ul {
 }
 
 
-input:checked+.toggle::before {
+input:checked +.toggle::before {
     transform: translateX(100%);
 }
 

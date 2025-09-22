@@ -1,5 +1,4 @@
 import {
-  components,
   elements,
   renderOptions,
   renderQuestions,
@@ -16,7 +15,7 @@ import jsIcon from "../assets/images/icon-js.svg";
 
 export class QuizApp {
   #currentAnswer = null;
-  #playerSCore = 0;
+  #playerScore = 0;
   #categoryIconInfo = null;
 
   constructor() {
@@ -76,7 +75,7 @@ export class QuizApp {
       this.shownQuestions.clear();
       elements.quiz.classList.toggle("hide");
 
-      this.#playerSCore = 0;
+      this.#playerScore = 0;
     });
   }
   _optionsEvent() {
@@ -132,7 +131,7 @@ export class QuizApp {
     // update btn and add class to update btn bg
 
     const rightIcon = `<img src="${correctIcon}" alt="correct answer" class="status-icon">`;
-    const wrongIcon = `<img src="${incorrectIcon}"  alt="wrong answer" class="status-icon"">`;
+    const wrongIcon = `<img src="${incorrectIcon}"  alt="wrong answer" class="status-icon">`;
     const userOptionStatus = el.querySelector(".status");
     const getAllOptions = document.querySelectorAll(".option");
 
@@ -144,17 +143,17 @@ export class QuizApp {
     });
     if (rightAnswer) {
       userOptionStatus.innerHTML = rightIcon;
-      this.#playerSCore++;
+      this.#playerScore++;
       el.classList.add("correct");
       return true;
     }
-    const getCorrectBtn = [...getAllOptions].find((el) => {
+    const correctBtn = [...getAllOptions].find((el) => {
       return (
         el.querySelector(".option__text").textContent === this.#currentAnswer
       );
     });
 
-    getCorrectBtn.querySelector(".status").innerHTML = rightIcon;
+    correctBtn.querySelector(".status").innerHTML = rightIcon;
     userOptionStatus.innerHTML = wrongIcon;
     el.classList.add("incorrect");
 
@@ -176,7 +175,7 @@ export class QuizApp {
         icon: this.#categoryIconInfo.html,
         type: this.#categoryIconInfo.title,
         class: this.#categoryIconInfo.class,
-        finalScore: this.#playerSCore,
+        finalScore: this.#playerScore,
         count: this.questions.length,
       };
 
