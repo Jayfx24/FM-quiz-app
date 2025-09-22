@@ -223,9 +223,9 @@ export class QuizApp {
 
   _isDarkMode() {
     if (window.matchMedia) {
-      const isDark = window.matchMedia("prefers-color-scheme: dark");
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-      if (isDark) {
+      if (isDark.matches) {
         document.body.classList.add("dark");
         elements.modeToggle.checked = true;
       } else {
