@@ -3,6 +3,7 @@ import {
   renderOptions,
   renderQuestions,
   renderGameOver,
+  shuffle
 } from "./domController";
 import { quizData } from "./processData";
 import data from "../data.json";
@@ -43,7 +44,8 @@ export class QuizApp {
       const value = target.value;
       this.data = quizData(data, value);
 
-      this.questions = this.data.questions;
+      this.questions = this.data.questions
+           
 
       const title = this.data.title;
       const selectedCategory = icons[title];
@@ -188,7 +190,8 @@ export class QuizApp {
       (q) => !this.shownQuestions.has(q.question)
     );
 
-    const newQ = questions.pop();
+    const newQ = shuffle(questions).pop();
+    const questionsOptions = shuffle(newQ.options)
     this.shownQuestions.add(newQ.question);
     this.#currentAnswer = newQ.answer;
 
@@ -200,7 +203,7 @@ export class QuizApp {
     };
 
     renderQuestions(questionsInfo);
-    renderOptions(newQ.options);
+    renderOptions(questionsOptions);
   }
 
   _bindEvent() {
